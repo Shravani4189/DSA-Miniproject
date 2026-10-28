@@ -1,0 +1,33 @@
+{
+    "bookings": [
+        {
+            "booking_id": "BK1001",
+            "passenger": "shravani navale",
+            "contact": "9730034189",
+            "flight_no": "UK610",
+            "airline": "Vistara",
+            "route": "Pune → Mumbai",
+            "source": "Pune",
+            "destination": "Mumbai",
+            "departure": "14:10",
+            "fare": 2900,
+            "status": "Cancelled",
+            "created_at": "28 Oct 2026, 12:59 PM"
+        },
+        {
+            "booking_id": "BK1002",
+            "passenger": "shrav",
+            "contact": "9730034189",
+            "flight_no": "SG302",
+            "airline": "SpiceJet",
+            "route": "Pune → Delhi",
+            "source": "Pune",
+            "destination": "Delhi",
+            "departure": "19:05",
+            "fare": 3450,
+            "status": "Cancelled",
+            "created_at": "28 Oct 2026, 01:05 PM"
+        }
+    ],
+    "next_id": 1003
+}

@@ -1,0 +1,72 @@
+[
+    {
+        "flight_no": "AI101",
+        "airline": "Air India",
+        "source": "Pune",
+        "destination": "Delhi",
+        "departure": "08:30",
+        "arrival": "10:45",
+        "fare": 4500,
+        "seats": 12
+    },
+    {
+        "flight_no": "6E204",
+        "airline": "IndiGo",
+        "source": "Pune",
+        "destination": "Delhi",
+        "departure": "11:15",
+        "arrival": "13:25",
+        "fare": 3800,
+        "seats": 8
+    },
+    {
+        "flight_no": "SG302",
+        "airline": "SpiceJet",
+        "source": "Pune",
+        "destination": "Delhi",
+        "departure": "19:05",
+        "arrival": "21:20",
+        "fare": 3450,
+        "seats": 10
+    },
+    {
+        "flight_no": "AI205",
+        "airline": "Air India",
+        "source": "Mumbai",
+        "destination": "Bengaluru",
+        "departure": "09:00",
+        "arrival": "10:40",
+        "fare": 4100,
+        "seats": 7
+    },
+    {
+        "flight_no": "6E411",
+        "airline": "IndiGo",
+        "source": "Mumbai",
+        "destination": "Bengaluru",
+        "departure": "17:20",
+        "arrival": "19:00",
+        "fare": 3600,
+        "seats": 9
+    },
+    {
+        "flight_no": "UK610",
+        "airline": "Vistara",
+        "source": "Pune",
+        "destination": "Mumbai",
+        "departure": "14:10",
+        "arrival": "15:05",
+        "fare": 2900,
+        "seats": 6
+    },
+    {
+        "flight_no": "AI309",
+        "airline": "Air India",
+        "source": "Delhi",
+        "destination": "Mumbai",
+        "departure": "06:45",
+        "arrival": "08:55",
+        "fare": 5200,
+        "seats": 4
+    }
+]

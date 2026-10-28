@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Find Flights | SkyBook{% endblock %}
+{% block content %}
+<section class="page-hero compact-hero">
+    <div class="eyebrow"><span class="eyebrow-dot"></span> FLIGHT EXPLORER</div>
+    <h1>Your next trip,<br><span>one search away.</span></h1>
+    <p>Explore sample routes, compare fares and select the flight that works for you.</p>
+</section>
+<section class="results-section">
+    <form class="filter-card" action="{{ url_for('flights_page') }}" method="get">
+        <label class="field"><span>FROM</span><input name="source" value="{{ source }}" placeholder="e.g. Pune"></label>
+        <label class="field"><span>TO</span><input name="destination" value="{{ destination }}" placeholder="e.g. Delhi"></label>
+        <label class="field"><span>AIRLINE</span><input name="airline" value="{{ airline }}" placeholder="Any airline"></label>
+        <input type="hidden" name="sort" value="{{ sort_by }}">
+        <button class="button button-primary" type="submit">Apply filters →</button>
+    </form>
+
+    <div class="results-toolbar">
+        <div><h2>Available flights <span class="count-badge">{{ flights|length }}</span></h2><p>Sample flights for your mini-project</p></div>
+        <form class="sort-form" action="{{ url_for('flights_page') }}" method="get">
+            <input type="hidden" name="source" value="{{ source }}">
+            <input type="hidden" name="destination" value="{{ destination }}">
+            <input type="hidden" name="airline" value="{{ airline }}">
+            <label for="sort">Sort by</label>
+            <select name="sort" id="sort" onchange="this.form.submit()">
+                <option value="fare" {% if sort_by == 'fare' %}selected{% endif %}>Fare: low to high</option>
+                <option value="departure" {% if sort_by == 'departure' %}selected{% endif %}>Departure time</option>
+                <option value="seats" {% if sort_by == 'seats' %}selected{% endif %}>Most seats available</option>
+                <option value="airline" {% if sort_by == 'airline' %}selected{% endif %}>Airline A–Z</option>
+            </select>
+        </form>
+    </div>
+
+    {% if flights %}
+    <div class="flight-list">
+        {% for flight in flights %}
+        <article class="flight-card">
+            <div class="flight-airline"><span class="airline-badge large">{{ flight.airline[:2]|upper }}</span><div><strong>{{ flight.airline }}</strong><small>{{ flight.flight_no }}</small></div></div>
+            <div class="flight-route"><div><strong>{{ flight.departure }}</strong><span>{{ flight.source }}</span></div><div class="flight-duration"><span>Non-stop</span><i></i><small>{{ flight.source[:3]|upper }} → {{ flight.destination[:3]|upper }}</small></div><div><strong>{{ flight.arrival }}</strong><span>{{ flight.destination }}</span></div></div>
+            <div class="flight-seats"><span>AVAILABLE</span><strong>{{ flight.seats }}</strong><small>seats</small></div>
+            <div class="flight-book"><span class="fare-label">FARE / PERSON</span><strong class="fare">₹{{ "{:,}".format(flight.fare) }}</strong>
+                <form action="{{ url_for('book_flight', flight_no=flight.flight_no) }}" method="post" class="booking-form">
+                    <input name="passenger" placeholder="Passenger full name" required maxlength="80">
+                    <input name="contact" placeholder="Contact number" required inputmode="numeric" pattern="[0-9]{7,15}" title="Enter 7 to 15 digits">
+                    <button class="button button-primary" type="submit">Book this flight →</button>
+                </form>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state"><div class="empty-icon">⌕</div><h3>No flights found</h3><p>Try another source, destination, or airline. You can also clear your filters.</p><a class="button button-primary" href="{{ url_for('flights_page') }}">Show all flights</a></div>
+    {% endif %}
+</section>
+{% endblock %}

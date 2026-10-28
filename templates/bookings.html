@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}My Bookings | SkyBook{% endblock %}
+{% block content %}
+<section class="page-hero compact-hero booking-hero">
+    <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR TRAVEL DETAILS</div>
+    <h1>Every booking,<br><span>all in one place.</span></h1>
+    <p>Review booking IDs and cancel a reservation if needed.</p>
+</section>
+<section class="results-section booking-history-section">
+    <div class="results-toolbar"><div><h2>Booking history <span class="count-badge">{{ bookings|length }}</span></h2><p>Bookings are stored locally in a JSON file.</p></div><a class="button button-primary" href="{{ url_for('flights_page') }}">+ Book a flight</a></div>
+    {% if bookings %}
+    <div class="history-table-wrap">
+        <table class="history-table">
+            <thead><tr><th>BOOKING ID</th><th>PASSENGER</th><th>FLIGHT / ROUTE</th><th>FARE</th><th>STATUS</th><th>ACTION</th></tr></thead>
+            <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td><span class="booking-id">{{ booking.booking_id }}</span><small class="date-label">{{ booking.created_at }}</small></td>
+                <td><strong>{{ booking.passenger }}</strong><small>{{ booking.contact }}</small></td>
+                <td><strong>{{ booking.flight_no }} · {{ booking.airline }}</strong><small>{{ booking.route }}</small></td>
+                <td><strong>₹{{ "{:,}".format(booking.fare) }}</strong></td>
+                <td><span class="status-pill {{ 'status-cancelled' if booking.status == 'Cancelled' else 'status-confirmed' }}">{{ booking.status }}</span></td>
+                <td>
+                    {% if booking.status != 'Cancelled' %}
+                    <form action="{{ url_for('cancel_booking', booking_id=booking.booking_id) }}" method="post" class="cancel-form" data-confirm="Cancel booking {{ booking.booking_id }}?">
+                        <button class="button button-danger button-small" type="submit">Cancel</button>
+                    </form>
+                    {% else %}<span class="muted">—</span>{% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state"><div class="empty-icon">▤</div><h3>No bookings yet</h3><p>Once you book a sample flight, the booking will appear here.</p><a class="button button-primary" href="{{ url_for('flights_page') }}">Find flights →</a></div>
+    {% endif %}
+</section>
+{% endblock %}

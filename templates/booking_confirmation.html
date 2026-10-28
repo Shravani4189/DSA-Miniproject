@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Booking Confirmed | SkyBook{% endblock %}
+{% block content %}
+<section class="confirmation-wrap">
+    <div class="confirmation-card">
+        <div class="success-icon">✓</div>
+        <div class="eyebrow centered"><span class="eyebrow-dot"></span> BOOKING SUCCESSFUL</div>
+        <h1>You're all set,<br><span>{{ booking.passenger }}!</span></h1>
+        <p class="confirmation-subtitle">Your sample flight booking has been confirmed. Keep your booking ID for reference.</p>
+        <div class="ticket">
+            <div class="ticket-top"><div><span class="ticket-label">BOOKING ID</span><strong class="ticket-id">{{ booking.booking_id }}</strong></div><span class="status-pill status-confirmed">Confirmed</span></div>
+            <div class="ticket-route"><div><span class="ticket-label">FROM</span><strong>{{ booking.source }}</strong><small>{{ booking.departure }}</small></div><div class="ticket-plane">✈<i></i></div><div class="ticket-destination"><span class="ticket-label">TO</span><strong>{{ booking.destination }}</strong><small>{{ booking.airline }}</small></div></div>
+            <div class="ticket-bottom"><div><span class="ticket-label">PASSENGER</span><strong>{{ booking.passenger }}</strong></div><div><span class="ticket-label">FLIGHT</span><strong>{{ booking.flight_no }}</strong></div><div><span class="ticket-label">TOTAL FARE</span><strong class="ticket-fare">₹{{ "{:,}".format(booking.fare) }}</strong></div></div>
+        </div>
+        <div class="confirmation-actions"><a class="button button-primary" href="{{ url_for('bookings_page') }}">View my bookings →</a><a class="button button-light" href="{{ url_for('flights_page') }}">Find another flight</a></div>
+    </div>
+</section>
+{% endblock %}
